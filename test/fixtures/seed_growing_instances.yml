@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  variety: one
+  start_date: 2024-02-16 18:06:46
+  harvest_date: 2024-02-16 18:06:46
+  story: MyText
+  seeds_saved: false
+
+two:
+  user: two
+  variety: two
+  start_date: 2024-02-16 18:06:46
+  harvest_date: 2024-02-16 18:06:46
+  story: MyText
+  seeds_saved: false
