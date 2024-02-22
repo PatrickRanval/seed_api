@@ -1,4 +1,10 @@
 class User < ApplicationRecord
-    has_many :varieties
     has_many :seed_growing_instances
+    has_many :user_varieties
+    has_many :varieties, through: :user_varieties
+  
+    validates :email, presence: true, uniqueness: true
+    validates :password, presence: true
+    validates :first_name, presence: true
+    validates :last_name, presence: true
 end
