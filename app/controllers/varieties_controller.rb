@@ -1,53 +1,49 @@
+require 'byebug'
+
 class VarietiesController < ApplicationController
     def index
         varieties = Variety.all
         render json: varieties
-    end
-
-    def show
+      end
+    
+      def show
         variety = Variety.find(params[:id])
         render json: variety
-    end
+      end
     
-    def create
-        variety = Variety.new(type_id: variety_params[:type_id], name: variety_params[:name])
+      def create
+        variety = Variety.new(variety_params)
         if variety.save
-            render json: variety
-        else 
-            render json: { error: "Variety already exists or some other fail" }, status: :unprocessable_entity
+          render json: variety
+        else
+          render json: { error: "Variety already exists or some other fail" }, status: :unprocessable_entity
         end
-    end
-
-    def update
+      end
+    
+      def update
         variety = Variety.find(params[:id])
-        variety.update(type_id: variety_params[:type_id], name: variety_params[:name])
+        variety.update(variety_params)
     
         render json: variety
-    end
-
-    def destroy
+      end
+    
+      def destroy
         variety = Variety.find(params[:id])
         variety.destroy
     
         render json: variety
-    end
+      end
     
     
     def variety_params
-        permitted_params = params.permit(:type_name, :type_id, :name)
+        params.require(:type_id)
+        params.require(:name)
       
-        # If type_id is not present but type_name is, find it and add to permitted_params
-        if !permitted_params[:type_id] && permitted_params[:type_name]
-          type = Type.find_by(name: permitted_params[:type_name])
-      
-          if type.nil?
-            render json: { error: "Invalid type_name. Type not found." }, status: :unprocessable_entity
-            return
-          else
-            permitted_params[:type_id] = type.id
-          end
+        if !Type.exists?(params[:type_id])
+          render json: { error: "Invalid type_id. Type not found." }, status: :unprocessable_entity
+          return
         end
-        permitted_params
-      end
-
+      
+        { type_id: params[:type_id], name: params[:name] }
+    end
 end
