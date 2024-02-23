@@ -3,5 +3,5 @@ class Source < ApplicationRecord
     has_many :source_records
     has_many :varieties, through: :source_records
 
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
 end
