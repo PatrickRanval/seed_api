@@ -41,8 +41,11 @@ gem 'byebug'
 # ERD visualizer
 gem 'rails-erd'
 
-#Faker for Data Generation
+# Faker for Data Generation
 gem 'faker'
+
+# BCrypt for password hashing
+gem 'bcrypt'
 
 
 group :development, :test do
