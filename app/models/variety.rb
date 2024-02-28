@@ -7,5 +7,5 @@ class Variety < ApplicationRecord
   has_many :sources, through: :source_records
 
   validates :type_id, presence: true
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :type_id }
 end
