@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_202006) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_171052) do
   create_table "listings", force: :cascade do |t|
     t.integer "variety_id", null: false
     t.integer "vendor_id", null: false
@@ -59,10 +59,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_202006) do
     t.integer "source_id", null: false
   end
 
+  create_table "trays", force: :cascade do |t|
+    t.string "name"
+    t.integer "cells_short"
+    t.integer "cells_long"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_trays", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "tray_id", null: false
+    t.text "seed_map"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tray_id"], name: "index_user_trays_on_tray_id"
+    t.index ["user_id"], name: "index_user_trays_on_user_id"
   end
 
   create_table "user_varieties", force: :cascade do |t|
@@ -104,6 +122,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_202006) do
   add_foreign_key "seed_growing_instances", "varieties"
   add_foreign_key "source_records", "sources"
   add_foreign_key "source_records", "varieties"
+  add_foreign_key "user_trays", "trays"
+  add_foreign_key "user_trays", "users"
   add_foreign_key "user_varieties", "users"
   add_foreign_key "user_varieties", "varieties"
   add_foreign_key "varieties", "types"
