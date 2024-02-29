@@ -1,7 +1,8 @@
 class VarietiesController < ApplicationController
+    before_action :authenticate_request
     def index
         varieties = Variety.all
-        render json: varieties, status: :ok
+        render json: VarietyBlueprint.render(varieties, view: :normal)
     end
 
     def show

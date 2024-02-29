@@ -47,6 +47,12 @@ gem 'faker'
 # BCrypt for password hashing
 gem 'bcrypt'
 
+# JWT for Token Management
+gem 'jwt'
+
+# Blueprinter for Serialization
+gem 'blueprinter'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
