@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   get 'users/create'
   get 'sessions/create'
+  
   scope '/' do
     post 'login', to: 'sessions#create'
+    resources :users, only: [:create] do
+      resources :user_trays, :user_varieties, only: [:index, :show, :create, :update, :destroy]
+    end
   end
-  resources :users, only: [:create]
-  resources :varieties, only: [:index, :show, :create, :update, :destroy]
-  resources :types, only: [:index, :show, :create, :update, :destroy]
-  resources :vendors, only: [:index, :show, :create, :update, :destroy]
-  resources :sources, only: [:index, :show, :create, :update, :destroy]
   
+  resources :trays, only: [:index, :show, :create, :update, :destroy]
+  resources :varieties, :types, :vendors, :sources, only: [:index, :show, :create, :update, :destroy]
 end

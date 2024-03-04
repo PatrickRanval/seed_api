@@ -7,7 +7,7 @@ class VarietiesController < ApplicationController
 
     def show
         variety = Variety.find(params[:id])
-        render json: variety, status: :ok
+        render json: VarietyBlueprint.render(variety, view: :normal)
     end
 
     def create
