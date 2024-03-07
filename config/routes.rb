@@ -11,4 +11,15 @@ Rails.application.routes.draw do
   
   resources :trays, only: [:index, :show, :create, :update, :destroy]
   resources :varieties, :types, :vendors, :sources, only: [:index, :show, :create, :update, :destroy]
+
+  # Front End Scope should include
+
+  # Without Login Token:
+  # /login
+  # /trays
+  # /varieties
+
+  # With Login Token:
+  # users/:id/user_trays
+  # users/:id/user_varieties
 end
