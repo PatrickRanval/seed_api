@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VarietyBlueprint < Blueprinter::Base
-    fields :name
+    fields :id, :name
   
     view :normal do
         #Alternative way to get simpler JSON
