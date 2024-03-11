@@ -4,7 +4,7 @@ class UserVarietiesController < ApplicationController
 
   def index
       user_varieties = @user.user_varieties
-      render json: user_varieties, status: :ok
+      render json: UserVarietyBlueprint.render(user_varieties, view: :normal), status: :ok
   end
   
   def show
