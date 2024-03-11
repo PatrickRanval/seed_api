@@ -8,6 +8,10 @@ Rails.application.routes.draw do
       resources :user_trays, :user_varieties, only: [:index, :show, :create, :update, :destroy]
     end
   end
+
+  resources :users, only: [] do
+    resources :user_varieties, only: [:index, :show, :create, :update, :destroy]
+  end
   
   resources :trays, only: [:index, :show, :create, :update, :destroy]
   resources :varieties, :types, :vendors, :sources, only: [:index, :show, :create, :update, :destroy]
