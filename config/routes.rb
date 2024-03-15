@@ -1,29 +1,21 @@
 Rails.application.routes.draw do
-  get 'users/create'
-  get 'sessions/create'
-  
-  scope '/' do
-    post 'login', to: 'sessions#create'
-    resources :users, only: [:create] do
-      resources :user_trays, :user_varieties, only: [:index, :show, :create, :update, :destroy]
-    end
-  end
+  # Sessions routes
+  post 'login', to: 'sessions#create'
 
-  resources :users, only: [] do
+  # Users routes
+  resources :users, only: [:create] do
     resources :user_varieties, only: [:index, :show, :create, :update, :destroy]
   end
-  
+
+  # Additional users route for creating users
+  post 'users', to: 'users#create'
+
+  # User_varieties routes (nested under users)
+  resources :user_varieties, only: [:index, :show, :create, :update, :destroy]
+
+  # Trays routes
   resources :trays, only: [:index, :show, :create, :update, :destroy]
+
+  # Other resources (varieties, types, vendors, sources)
   resources :varieties, :types, :vendors, :sources, only: [:index, :show, :create, :update, :destroy]
-
-  # Front End Scope should include
-
-  # Without Login Token:
-  # /login
-  # /trays
-  # /varieties
-
-  # With Login Token:
-  # users/:id/user_trays
-  # users/:id/user_varieties
 end
