@@ -35,16 +35,36 @@ class VarietiesController < ApplicationController
           end
     end
 
+    ####
+    #### Ugh, I think this is related to Type.name and Variety.name 
+    ####
 
     def variety_params
-        params.require(:type_id)
-        params.require(:name)
-
-        if !Type.exists?(params[:type_id])
-            render json: { error: "Invalid type_id. Type not found." }, status: :unprocessable_entity
-            return
+        params.require(:type_name)
+        params.require(:variety_name)
+    
+        # Find the Type by name
+        type = Type.find_by(name: params[:type_name])
+    
+        if type.nil?
+            # Type not found, dynamically create it
+            type = Type.create(name: params[:type_name])
         end
-
-        { type_id: params[:type_id], name: params[:name] }
+    
+        { type_id: type.id, name: params[:variety_name] } # Access the :variety_name parameter
     end
+
+    # def variety_params
+    #     params.require(:type_id)
+    #     params.require(:name)
+
+    #     if !Type.exists?(params[:type_id])
+    #         render json: { error: "Invalid type_id. Type not found." }, status: :unprocessable_entity
+    #         return
+    #     end
+
+    #     { type_id: params[:type_id], name: params[:name] }
+    # end
+
+
 end
