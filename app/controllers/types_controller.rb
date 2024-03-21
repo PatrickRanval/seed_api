@@ -6,35 +6,45 @@ class TypesController < ApplicationController
       render json: types, status: :ok
     end
   
-    def show
-        render json: @type, status: :ok
-    end
-  
+    
     def create
-      type = Type.new(type_params)
-  
-      if type.save
-        render json: type, status: :ok
+      result = TypeService::Base.create_type(type_params)
+      
+      if result.success?
+        render_success(payload: TypeBlueprint.render_as_hash(result.payload, view: :normal), status: :created)
       else
-        render json: { error: "Type already exists or some other fail" }, status: :unprocessable_entity
+        render_error(errors: result.errors, status: :unprocessable_entity)
       end
     end
- 
+    
+    def show
+      result = TypeService::Base.show_type(@type)
+
+      if result.success?
+        render_success(payload: TypeBlueprint.render_as_hash(result.payload, view: :normal), status: :ok)
+      else
+        render_error(errors: result.errors, status: :unprocessable_entity)
+      end
+    end
   
     def update
-      if @type.update(type_params)
-        render json: @type, status: :ok
+      result = TypeService::Base.update_type(@type, type_params)
+
+      if result.success?
+        render_success(payload: TypeBlueprint.render_as_hash(result.payload, view: :normal), status: :ok)
       else
-        render json: { error: "Some kinda fail" }, status: :unprocessable_entity
+        render_error(errors: result.errors, status: :unprocessable_entity)
       end
     end
   
     def destroy
-        if @type.destroy
-            render json: nil, status: :ok
-          else
-            render json: @type.errors, status: :unprocessable_entity
-          end
+      result = TypeService::Base.destroy_type(@type)
+      
+      if result.success?
+        render_success(payload: TypeBlueprint.render_as_hash(result.payload, view: :normal), status: :ok)
+      else
+        render_error(errors: result.errors, status: :unprocessable_entity)
+      end
     end
   
     private
