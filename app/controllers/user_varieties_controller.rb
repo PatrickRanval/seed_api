@@ -48,7 +48,7 @@ class UserVarietiesController < ApplicationController
   end
 
   def user_variety_params
-    params.permit(:variety_id, :seed_map)
+    params.permit(:variety_id)
   end
 end
 
