@@ -2,31 +2,42 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
   
   def create
-    user = User.new(user_params)
-    if user.save
-      render json: UserBlueprint.render(user, view: :normal), status: :created
+    result = UserService::Base.create_user(user_params)
+
+    if result.success?
+      render_success(payload: UserBlueprint.render_as_hash(result.payload, view: :normal), status: :created)
     else
-      render json: user.errors, status: :unprocessable_entity
+      render_error(errors: result.errors, status: :unprocessable_entity)
     end
   end
 
   def show
-    render json: @user, status: :ok
+    result = UserService::Base.show_user(@user)
+
+    if result.success?
+      render_success(payload: result.payload, status: :ok)
+    else
+      render_error(errors: result.errors, status: :unprocessable_entity)
+    end
   end
 
   def update
-    if @user.update(user_params)
-      render json: @user, status: :ok
+    result = UserService::Base.update_user(@user, user_params)
+
+    if result.success?
+      render_success(payload: result.payload, status: :ok)
     else
-      render json: { error: "Some kinda fail" }, status: :unprocessable_entity
+      render_error(errors: result.errors, status: :unprocessable_entity)
     end
   end
 
   def destroy
-    if @user.destroy
-      render json: nil, status: :ok
+    result = UserService::Base.destroy_user(@user)
+
+    if result.success?
+      render_success(payload: result.payload, status: :ok)
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render_error(errors: result.errors, status: :unprocessable_entity)
     end
   end
 
@@ -40,3 +51,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 end
+
