@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
 
   # Users routes
-  resources :users, only: [:create] do
+  resources :users, only: [:create, :destroy] do
     resources :user_varieties, only: [:index, :show, :create, :update, :destroy]
   end
 
