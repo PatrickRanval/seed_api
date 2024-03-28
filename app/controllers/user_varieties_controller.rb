@@ -18,6 +18,9 @@ class UserVarietiesController < ApplicationController
   end
   
   def create
+    # Maybe a little uglier than it should be...
+    variety = VarietyService::Base.find_or_create_variety(variety_params)
+    user_variety_params = { variety_id: variety.id }
     result = UserVarietyService::Base.create_user_variety(@user, user_variety_params)
 
     if result.success?
@@ -55,6 +58,10 @@ class UserVarietiesController < ApplicationController
 
   def set_user_variety
     @user_variety = @user.user_varieties.find(params[:id])
+  end
+
+  def variety_params
+    params.permit(:type_name, :variety_name)
   end
 
   def user_variety_params
