@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # Users routes
   resources :users, only: [:create, :destroy] do
     resources :user_varieties, only: [:index, :show, :create, :update, :destroy]
+    resources :user_trays, only: [:index, :show, :create, :update, :destroy]
   end
 
   # Additional users route for creating users

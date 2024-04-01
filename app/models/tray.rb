@@ -1,4 +1,8 @@
 class Tray < ApplicationRecord
+
+    has_many :user_trays
+    has_many :users, through: :user_trays
+    
     # Validation for valid plug tray configurations 512 cells (16x32) is the largest I'm aware of.   
     validates :name, presence: true
     validates :cells_short, presence: true, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 32 }

@@ -4,7 +4,7 @@ class UserTraysController < ApplicationController
 
   def index
     user_trays = @user.user_trays
-    render json: user_trays, status: :ok
+    render json: UserTrayBlueprint.render(user_trays, view: :normal), status: :ok
   end
   
   def show

@@ -1,0 +1,9 @@
+ => 
+[32m#<User:0x00007f09c698b418[0m
+ id: [34m[1m8[0m,
+ email: [31m[1m"[0m[31mJuan3@Cussler.cli[0m[31m[1m"[0m,
+ first_name: [31m[1m"[0m[31mJuan[0m[31m[1m"[0m,
+ last_name: [31m[1m"[0m[31mCabrillo[0m[31m[1m"[0m,
+ created_at: Thu, 29 Feb 2024 20:21:14.552051000 UTC +00:00,
+ updated_at: Thu, 29 Feb 2024 20:21:14.552051000 UTC +00:00,
+ password_digest: [31m[1m"[0m[31m[FILTERED][0m[31m[1m"[0m[32m>[0m 
