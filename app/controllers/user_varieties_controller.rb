@@ -57,6 +57,10 @@ class UserVarietiesController < ApplicationController
   end
 
   def set_user_variety
+    # Problems here definitely
+    # :id is referencing the record identity and not the variety_id
+    # Need to find best practices for correcting 
+    
     @user_variety = @user.user_varieties.find(params[:id])
   end
 

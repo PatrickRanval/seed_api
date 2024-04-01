@@ -8,4 +8,9 @@ class VarietyBlueprint < Blueprinter::Base
         # fields :type_name      
       association :type, blueprint: TypeBlueprint, view: :normal
     end    
+
+    # view :for_user_variety do
+    #   association :variety, blueprint: VarietyBlueprint, view: :normal, exclude: [:id]
+    #   # Add other fields if needed
+    # end
 end
