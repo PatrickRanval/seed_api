@@ -7,6 +7,7 @@ module ServiceContract
         })
     end
 
+                        # Appended empty array
     def self.error(errors)
         OpenStruct.new({
             success?: false,

@@ -18,8 +18,10 @@ class UserTraysController < ApplicationController
   end
   
   def create
+    tray = TrayService::Base.find_or_create_tray(tray_params)
+    user_tray_params = { tray_id: tray.id }
     result = UserTrayService::Base.create_user_tray(@user, user_tray_params)
-
+  
     if result.success?
       render_success(payload: result.payload, status: :ok)
     else
@@ -51,6 +53,10 @@ class UserTraysController < ApplicationController
 
   def set_user
     @user = User.find(params[:user_id])
+  end
+
+  def tray_params
+    params.permit(:tray_name)
   end
 
   def set_user_tray

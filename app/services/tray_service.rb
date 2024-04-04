@@ -10,6 +10,12 @@ module TrayService
           ServiceContract.error(tray.errors.full_messages)
         end
       end
+
+      def self.find_or_create_tray(params)
+          tray = Tray.find_or_create_by(name: params[:tray_name])
+      
+          tray
+      end
   
       def self.show_tray(tray)
         begin
