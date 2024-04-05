@@ -18,7 +18,7 @@ class UserTraysController < ApplicationController
   end
   
   def create
-    tray = TrayService::Base.find_or_create_tray(tray_params)
+    tray = TrayService::Base.find_tray(tray_params)
     user_tray_params = { tray_id: tray.id, seed_map: params[:seed_map]}
     result = UserTrayService::Base.create_user_tray(@user, user_tray_params)
   

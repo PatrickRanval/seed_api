@@ -3,7 +3,7 @@
 class UserTrayBlueprint < Blueprinter::Base
   
     view :normal do
-      field :id      
+      fields :id, :seed_map, :created_at, :updated_at      
       association :tray, blueprint: TrayBlueprint, view: :normal
     end  
 end

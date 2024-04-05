@@ -11,7 +11,7 @@ module TrayService
         end
       end
 
-      def self.find_or_create_tray(params)
+      def self.find_tray(params)
           tray = Tray.find_or_create_by(name: params[:tray_name])
       
           tray
