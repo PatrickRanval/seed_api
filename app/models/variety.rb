@@ -9,8 +9,5 @@ class Variety < ApplicationRecord
   validates :type_id, presence: true
   validates :name, presence: true, uniqueness: { scope: :type_id }
 
-  # An interesting method to render a simpler JSON
-  # def type_name
-  #   self.type.name
-  # end
+
 end
