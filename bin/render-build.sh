@@ -2,4 +2,4 @@
 # exit on error
 set -o errexit
 bundle install
-bundle exec rails server
+bundle exec rake db:migrate
